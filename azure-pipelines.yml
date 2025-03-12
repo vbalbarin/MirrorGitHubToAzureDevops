@@ -3,6 +3,7 @@ resources:
   - repository: avd # The name used to reference this repository in the checkout step
     type: github
     endpoint: avd-terraform
+    name: vbalbarin/avd
 
 pool:
 #  vmImage: ubuntu-latest
