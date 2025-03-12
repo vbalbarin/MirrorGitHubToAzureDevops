@@ -1,19 +1,23 @@
-resources:
-  repositories:
-  - repository: avd # The name used to reference this repository in the checkout step
-    type: github
-    endpoint: avd-terraform
-    name: vbalbarin/avd
-
 pool:
 #  vmImage: ubuntu-latest
   name: devopspool-wb
   
 steps:
-- checkout: self
-- checkout: avd
+- checkout: avd-terraform
+    persistCredentials: true
 - script: |
-    cd $(Agent.BuildDirectory)/avd
     git remote add github https://github.com/vbalbarin/avd.git
-  displayName: 'Add GitHub as a remote'
+    git fetch github
+    git pull github
+    git config user.email "avd-terraform@wirebyte.us"
+    git config user.name "avd-terraform"
+    git commit -m "Mirror from GitHub"
+    git push origin
+    az repos pr create --source-branch main --target-branch customer-main
+  displayName: 'Mirror GH to Az Devops'
  
+
+env:
+   AZURE_DEVOPS_EXT_PAT: $(System.AccessToken)
+
+
