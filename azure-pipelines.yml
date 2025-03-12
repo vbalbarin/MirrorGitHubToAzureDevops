@@ -4,7 +4,7 @@ pool:
   
 steps:
 - checkout: avd-terraform
-    persistCredentials: true
+  persistCredentials: true
 - script: |
     git remote add github https://github.com/vbalbarin/avd.git
     git fetch github
