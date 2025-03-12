@@ -1,6 +1,7 @@
 pool:
-  vmImage: <change-me>
-
+#  vmImage: ubuntu-latest
+  name: devopspool-wb
+  
 steps:
 - script: |
     git clone https://AeltermanCloud@dev.azure.com/AeltermanCloud/MirrorFromGitHub/_git/MirrorFromGitHub ../MirrorFromGitHub
