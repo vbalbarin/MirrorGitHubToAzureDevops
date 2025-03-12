@@ -1,0 +1,10 @@
+pool:
+  vmImage: <change-me>
+
+steps:
+- script: |
+    git clone https://AeltermanCloud@dev.azure.com/AeltermanCloud/MirrorFromGitHub/_git/MirrorFromGitHub ../MirrorFromGitHub
+    cd ../MirrorFromGitHub
+    git remote add github https://github.com/SvenAelterman/CyberSecuritySandbox.git
+  displayName: 'Add GitHub as a remote'
+ 
