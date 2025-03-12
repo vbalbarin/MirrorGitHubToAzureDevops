@@ -3,9 +3,10 @@ pool:
   name: devopspool-wb
   
 steps:
+- checkout: self
+- checkout: https://github.com/vbalbarin/avd.git 
 - script: |
-    git clone https://avd-wb@dev.azure.com/avd-wb/avd-terraform/_git/avd-terraform ../MirrorFromGitHub
-    cd ../MirrorFromGitHub
+    cd $(Agent.BuildDirectory)/avd
     git remote add github https://github.com/vbalbarin/avd.git
   displayName: 'Add GitHub as a remote'
  
