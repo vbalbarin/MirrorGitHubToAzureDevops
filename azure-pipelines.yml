@@ -1,8 +1,15 @@
+# resources:
+#   repositories:
+#   - repository: avd # The name used to reference this repository in the checkout step
+#     type: github
+#     endpoint: avd-terraform
+
+
 pool:
   name: devopspool-wb
 
 steps:
-- checkout: avd-terraform
+- checkout: git://avd-terraform/avd-terraform
   persistCredentials: true
 - bash: |
     git remote add github https://github.com/vbalbarin/avd.git
@@ -13,7 +20,7 @@ steps:
     git commit -m "Mirror from GitHub"
     git push origin
     az repos pr create --source-branch main --target-branch customer-main
-  name: "Mirror GH to Az Devops"
+  displayName: "Mirror GH to Az Devops"
 
 #env:
 #  AZURE_DEVOPS_EXT_PAT: $(System.AccessToken)
