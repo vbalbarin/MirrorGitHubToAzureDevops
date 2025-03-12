@@ -1,9 +1,6 @@
 pool:
-#  vmImage: ubuntu-latest
   name: devopspool-wb
-
 trigger: none
-
 steps:
 - checkout: avd-terraform
   persistCredentials: true
@@ -16,7 +13,6 @@ steps:
     git commit -m "Mirror from GitHub"
     git push origin
     az repos pr create --source-branch main --target-branch customer-main
-  name: 'Mirror GH to Az Devops'
-
+  name: "Mirror GH to Az Devops"
 env:
   AZURE_DEVOPS_EXT_PAT: $(System.AccessToken)
