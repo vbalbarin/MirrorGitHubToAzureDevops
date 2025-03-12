@@ -1,8 +1,6 @@
 pool:
   name: devopspool-wb
 
-trigger: none
-
 steps:
 - checkout: avd-terraform
   persistCredentials: true
