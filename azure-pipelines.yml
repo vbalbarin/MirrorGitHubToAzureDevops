@@ -1,3 +1,9 @@
+resources:
+  repositories:
+  - repository: MyGitHubRepo # The name used to reference this repository in the checkout step
+    type: github
+    endpoint: MyGitHubServiceConnection
+
 pool:
 #  vmImage: ubuntu-latest
   name: devopspool-wb
