@@ -14,10 +14,9 @@ steps:
 - bash: |
     git remote add github https://github.com/vbalbarin/avd.git
     git fetch github
-    git pull github
+    git pull github main
     git config user.email "avd-terraform@wirebyte.us"
     git config user.name "avd-terraform"
-    git checkout main
     git commit -m "Mirror from GitHub"
     git push origin
     az repos pr create --source-branch main --target-branch customer-main
