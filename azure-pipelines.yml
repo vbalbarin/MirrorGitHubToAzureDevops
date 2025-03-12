@@ -17,7 +17,8 @@ steps:
     git pull github main
     git config user.email "avd-terraform@wirebyte.us"
     git config user.name "avd-terraform"
-    git checkout main
+    git switch -c pipeline/tmp # checkout resulted in DETACHED
+    git merge pipeline/tmp # checkout resulted in DETACHED
     git commit -m "Mirror from GitHub"
     git push origin
     az repos pr create --source-branch main --target-branch customer-main
