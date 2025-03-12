@@ -18,6 +18,7 @@ steps:
     git config user.email "avd-terraform@wirebyte.us"
     git config user.name "avd-terraform"
     git switch -c pipeline/tmp # checkout resulted in DETACHED
+    git checkout main
     git merge pipeline/tmp # checkout resulted in DETACHED
     git commit -m "Mirror from GitHub"
     git push origin
