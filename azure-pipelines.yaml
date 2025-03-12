@@ -4,8 +4,8 @@ pool:
   
 steps:
 - script: |
-    git clone https://AeltermanCloud@dev.azure.com/AeltermanCloud/MirrorFromGitHub/_git/MirrorFromGitHub ../MirrorFromGitHub
+    git clone https://avd-wb@dev.azure.com/avd-wb/avd-terraform/_git/avd-terraform ../MirrorFromGitHub
     cd ../MirrorFromGitHub
-    git remote add github https://github.com/SvenAelterman/CyberSecuritySandbox.git
+    git remote add github https://github.com/vbalbarin/avd.git
   displayName: 'Add GitHub as a remote'
  
