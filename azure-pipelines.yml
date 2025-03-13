@@ -8,7 +8,17 @@
 pool:
   name: $(MANAGED_DEVPOOL)
 
+# the following is not complete
 steps:
+- template: templates/mirror_ghb_ado.yml
+  parameters:
+poolname
+ado_tgt_reponame
+ghb_src_reponame
+email
+username
+
+
 - checkout: git://avd-terraform/avd-terraform
   persistCredentials: true
 - bash: |
