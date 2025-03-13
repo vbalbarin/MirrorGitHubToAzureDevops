@@ -2,8 +2,6 @@
 # file: mirror_ghb_ado.yml
 
 parameters:
-- name: poolname
-  default: ''
 - name: ado_tgt_reponame
   default: ''
 - name: ghb_src_reponame
@@ -12,10 +10,6 @@ parameters:
   default: ''
 - name: username
   default: ''
-
-
-pool:
-  name: ${{ parameters.poolname }}
 
 steps:
 - checkout: git://${{ parameters.ado_tgt_reponame }}
