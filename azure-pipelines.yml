@@ -12,29 +12,7 @@ pool:
 steps:
 - template: templates/mirror_ghb_ado.yml
   parameters:
-poolname
-ado_tgt_reponame
-ghb_src_reponame
-email
-username
-
-
-- checkout: git://avd-terraform/avd-terraform
-  persistCredentials: true
-- bash: |
-    # checkout resulted in DETACHED HEAD; next 3 lines fix this
-    git switch -c pipeline/tmp
-    git checkout main
-    git merge pipeline/tmp
-    # Create new remote to fetch source main
-    git remote add github $(GHB_SOURCE_REPO)
-    git fetch github
-    git pull github main
-    git config user.email "$(USER_EMAIL)"
-    git config user.name "$(USER_NAME)"
-    git commit -m "Mirror from GitHub"
-    git push origin
-    az repos pr create --source-branch main --target-branch customer-main
-  displayName: "Mirror GH to Az Devops"
-  env:
-    AZURE_DEVOPS_EXT_PAT: $(System.AccessToken)
+    ado_tgt_reponame: 
+    ghb_src_reponame: $(GHB_SOURCE_REPO)
+    email: $(USER_EMAIL)
+    username: $(USER_NAME)
