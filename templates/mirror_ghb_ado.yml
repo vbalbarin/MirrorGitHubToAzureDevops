@@ -1,5 +1,5 @@
 ---
-# template file
+# file: mirror_ghb_ado.yml
 
 parameters:
 - name: poolname
