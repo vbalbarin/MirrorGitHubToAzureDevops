@@ -11,8 +11,8 @@ pool:
 # the following is not complete
 steps:
 - template: templates/mirror_ghb_ado.yml
-  parameters:
-    ado_tgt_reponame: 
+  parameters: 
+    ado_tgt_reponame: $(ADO_TARGET_REPO) 
     ghb_src_reponame: $(GHB_SOURCE_REPO)
     email: $(USER_EMAIL)
     username: $(USER_NAME)
