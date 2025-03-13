@@ -1,3 +1,39 @@
 ---
 # template file
 
+parameters:
+- name: poolname
+  default: ''
+- name: ado_tgt_reponame
+  default: ''
+- name: ghb_src_reponame
+  default: ''
+- name: email
+  default: ''
+- name: username
+  default: ''
+
+
+pool:
+  name: ${{ parameters.poolname }}
+
+steps:
+- checkout: git://${{ parameters.ado_tgt_reponame }}
+  persistCredentials: true
+- bash: |
+    # checkout resulted in DETACHED HEAD; next 3 lines fix this
+    git switch -c pipeline/tmp
+    git checkout main
+    git merge pipeline/tmp
+    # Create new remote to fetch source main
+    git remote add github https://${{ parameters.ghb_src_reponame }}
+    git fetch github
+    git pull github main
+    git config user.email "${{ parameters.email }}"
+    git config user.name "${{ parameters.username }}"
+    git commit -m "Mirror from GitHub"
+    git push origin
+    az repos pr create --source-branch main --target-branch customer-main
+  displayName: "Mirror GH to Az Devops"
+  env:
+    AZURE_DEVOPS_EXT_PAT: $(System.AccessToken)
