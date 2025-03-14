@@ -6,14 +6,25 @@ This sample code uses an Azure Devops pipeline to mirror a Github repository to 
 ![Architecture](./assets/arch.png)
 
 ## Getting Started
-TODO: Guide users through getting your code up and running on their own system. In this section you can talk about:
-1.	Installation process
-2.	Software dependencies
-3.	Latest releases
-4.	API references
 
-## Build and Test
-TODO: Describe and show how to build your code and run the tests. 
+Requirements:
+
+1. Azure Devops Organization
+    * Target repository
+    * Pipeline repository
+    * This code
+
+2. GitHub Personal Account or Organization
+    * Source repository
+    * Azure Pipeline application (TODO: Check if required for a public repo)
+    * Github User that has access to personal account or organization
+
+Create an Azure DevOps Organization.
+Create a new Project.
+Create a new repository named `MirrorGitHubToAzureDevops`.
+Import this GH repository into `MirrorGitHubToAzureDevops`.
+Create a new repository to hold the mirrored GH repository `<name_of_gh_repo>`
+Import GH repository.
 
 ## Contribute
 TODO: Explain how other users and developers can contribute to make your code better. 
