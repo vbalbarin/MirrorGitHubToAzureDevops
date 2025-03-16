@@ -25,11 +25,17 @@ Create a new repository named `MirrorGitHubToAzureDevops`.
 Import this GH repository into `MirrorGitHubToAzureDevops`.
 Create a new repository to hold the mirrored GH repository `<name_of_gh_repo>`
 Import GH repository.
+Allow build service to create pull requests to the mirrored repository.
+Create DevOps Pool.
 
-## Contribute
-TODO: Explain how other users and developers can contribute to make your code better. 
+## Appendix
 
-If you want to learn more about creating good readme files then refer the following [guidelines](https://docs.microsoft.com/en-us/azure/devops/repos/git/create-a-readme?view=azure-devops). You can also seek inspiration from the below readme files:
-- [ASP.NET Core](https://github.com/aspnet/Home)
-- [Visual Studio Code](https://github.com/Microsoft/vscode)
-- [Chakra Core](https://github.com/Microsoft/ChakraCore)
+```bash
+az extension add --name azure-devops
+
+repo='MirrorGitHubToAzureDevops'
+project='<name_of_project>'
+org='<url_of_devops_org>'
+
+az repos create --org "${org}" --project "${project}" --name "${repo}"
+```
