@@ -2,6 +2,10 @@
 # file: mirror_ghb_ado.yml
 
 parameters:
+- name: pool_name
+  default: ''
+- name: image_name
+  default: 'ubuntu-latest'
 - name: ado_tgt_reponame
   default: ''
 - name: ghb_src_reponame
@@ -11,25 +15,32 @@ parameters:
 - name: username
   default: ''
 
-steps:
-- checkout: git://${{ parameters.ado_tgt_reponame }}
-  persistCredentials: true
-- bash: |
-    git config user.email "${{ parameters.email }}"
-    git config user.name "${{ parameters.username }}"
-    # checkout resulted in DETACHED HEAD; next 3 lines fix this
-    git switch -c pipeline/tmp
-    git checkout main
-    git merge pipeline/tmp
-    ts=$(date +%Y%m%d_%H%M%S)
-    git checkout -b "import-$ts"
-    # Create new remote to fetch source main
-    git remote add github https://${{ parameters.ghb_src_reponame }}
-    git fetch github
-    git pull github main
-    git add -A
-    git commit -m "Mirror from GitHub $ts"
-    git push origin "import-$ts"
-    az repos pr create --source-branch "import-$ts" --target-branch main
-  env:
-    AZURE_DEVOPS_EXT_PAT: $(System.AccessToken)
+jobs:
+- job: MirrorGHBADOJob
+  pool:
+    ${{ if ne(parameters.pool_name, '') }}:
+      name: ${{ parameters.pool_name }}
+    ${{ else }}:
+      vmImage: ${{ parameters.image_name }}
+  steps:
+  - checkout: git://${{ parameters.ado_tgt_reponame }}
+    persistCredentials: true
+  - bash: |
+      git config user.email "${{ parameters.email }}"
+      git config user.name "${{ parameters.username }}"
+      # checkout resulted in DETACHED HEAD; next 3 lines fix this
+      git switch -c pipeline/tmp
+      git checkout main
+      git merge pipeline/tmp
+      ts=$(date +%Y%m%d_%H%M%S)
+      git checkout -b "import-$ts"
+      # Create new remote to fetch source main
+      git remote add github https://${{ parameters.ghb_src_reponame }}
+      git fetch github
+      git pull github main
+      git add -A
+      git commit -m "Mirror from GitHub $ts"
+      git push origin "import-$ts"
+      az repos pr create --source-branch "import-$ts" --target-branch main
+    env:
+      AZURE_DEVOPS_EXT_PAT: $(System.AccessToken)
