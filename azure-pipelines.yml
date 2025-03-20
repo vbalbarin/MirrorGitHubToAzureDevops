@@ -1,17 +1,10 @@
-# resources:
-#   repositories:
-#   - repository: avd # The name used to reference this repository in the checkout step
-#     type: github
-#     endpoint: avd-terraform
+---
+# file: azure-pipelines.yml
 
-
-pool:
-  name: $(MANAGED_DEVPOOL)
-
-# the following is not complete
-steps:
+jobs:
 - template: templates/mirror_ghb_ado.yml
-  parameters: 
+  parameters:
+    pool_name: $(MANAGED_DEVPOOL) # set MANAGED_DEVPOOL='' to use msft runner
     ado_tgt_reponame: $(ADO_TARGET_REPO) 
     ghb_src_reponame: $(GHB_SOURCE_REPO)
     email: $(USER_EMAIL)
